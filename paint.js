@@ -9,6 +9,13 @@ function blockSelected(id){
     blocks[id].style.backgroundColor = randomColor();
 }
 
+function screenResized(){
+    console.log(canvas.offsetWidth)
+    for (let i = 0; i < sideLength*sideLength; i++){
+        blocks[i].style.flexBasis = `${canvas.offsetWidth / sideLength}px`
+    }
+}
+
 const canvas = document.querySelector(".canvas")
 const sideLength = 12;
 
@@ -18,7 +25,8 @@ for (let i = 0; i < sideLength*sideLength; i++){
     newBlock.classList.add("colorBlock")
     blocks.push(newBlock)
     canvas.appendChild(newBlock)
-    newBlock.style.flexBasis = `${864 / sideLength}px`
+    newBlock.style.flexBasis = `${canvas.offsetWidth / sideLength}px`
     newBlock.addEventListener("mouseover", () => blockSelected(i))
 }
 
+addEventListener("resize", screenResized)
